@@ -1,0 +1,77 @@
+.songs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: appear 500ms ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #444;
+  width: 300px;
+}
+
+.search input {
+  border: none;
+  flex: 1;
+}
+
+.search button {
+  all: unset;
+  display: flex;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.songs table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.songs th,
+.songs td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.songs th span {
+  vertical-align: middle;
+  padding-right: 5px;
+  font-size: 20px;
+  padding-bottom: 3px;
+}
+
+.songs tr:not(:has(th)) {
+  cursor: pointer;
+  transition: 200ms ease;
+}
+
+.songs tr:not(:has(th)):hover {
+  background-color: #111;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  animation: appear 500ms ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

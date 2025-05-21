@@ -1,0 +1,53 @@
+.song {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: appear 500ms ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.header .cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  background: #222;
+  border-radius: 10px;
+}
+
+.header .cover span {
+  font-size: 72px;
+}
+
+.header .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .details {
+  margin-top: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  animation: appear 500ms ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
