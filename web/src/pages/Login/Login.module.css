@@ -14,6 +14,7 @@
   background: #111;
   padding: 30px;
   border-radius: 10px;
+  animation: appear 500ms ease;
 }
 
 .login .inputs {
@@ -29,4 +30,16 @@
 
 .login button {
   margin-top: 10px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

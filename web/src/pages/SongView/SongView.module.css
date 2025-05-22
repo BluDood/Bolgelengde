@@ -3,13 +3,14 @@
   flex-direction: column;
   gap: 20px;
   animation: appear 500ms ease;
+  position: relative;
 }
 
 .header {
   display: flex;
   align-items: center;
   gap: 30px;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .header .cover {
@@ -38,6 +39,26 @@
   display: flex;
   justify-content: center;
   animation: appear 500ms ease;
+}
+
+.actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.actions button {
+  all: unset;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.actions button[data-type='delete'] {
+  color: red;
+}
+
+.actions button[data-type='save'] {
+  color: #0064ff;
 }
 
 @keyframes appear {

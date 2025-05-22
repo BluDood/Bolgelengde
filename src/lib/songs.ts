@@ -1,4 +1,15 @@
+import { Song } from '../../generated/prisma/index.js'
 import prisma from './prisma.js'
+
+export function filterSong(song: Song) {
+  return {
+    id: song.id,
+    title: song.title,
+    artist: song.artist,
+    genre: song.genre,
+    vibes: song.vibes
+  }
+}
 
 export async function getSongs() {
   const song = await prisma.song.findMany()

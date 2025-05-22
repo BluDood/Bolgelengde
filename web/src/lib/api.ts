@@ -13,3 +13,14 @@ instance.interceptors.request.use(config => {
   }
   return config
 })
+
+instance.interceptors.response.use(response => {
+  if (
+    response.status === 401 &&
+    !window.location.pathname.startsWith('/auth')
+  ) {
+    localStorage.removeItem('token')
+    window.location.href = '/auth'
+  }
+  return response
+})

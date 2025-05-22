@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { createSong, getSongs } from '../../lib/songs.js'
+import { createSong, filterSong, getSongs } from '../../lib/songs.js'
 import { createSongSchema } from '../../lib/schemas.js'
 
 export async function get(req: Request, res: Response) {
@@ -7,11 +7,12 @@ export async function get(req: Request, res: Response) {
 
   const songs = await getSongs()
 
-  res.send(songs)
+  res.send(songs.map(filterSong))
 }
 
 export async function post(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
+  if (req.user.type !== 'admin') return res.sendStatus(403)
 
   const parsed = createSongSchema.safeParse(req.body)
   if (!parsed.success) return res.sendStatus(400)
@@ -24,5 +25,5 @@ export async function post(req: Request, res: Response) {
     vibes
   })
 
-  res.send(song)
+  res.send(filterSong(song))
 }

@@ -1,6 +1,11 @@
 import { Request, Response } from 'express'
 import { idSchema, updateSongSchema } from '../../../lib/schemas.js'
-import { deleteSong, getSong, updateSong } from '../../../lib/songs.js'
+import {
+  deleteSong,
+  filterSong,
+  getSong,
+  updateSong
+} from '../../../lib/songs.js'
 
 export async function get(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
@@ -12,11 +17,12 @@ export async function get(req: Request, res: Response) {
   const song = await getSong(id)
   if (!song) return res.sendStatus(404)
 
-  res.send(song)
+  res.send(filterSong(song))
 }
 
 export async function patch(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
+  if (req.user.type !== 'admin') return res.sendStatus(403)
 
   const parsedParams = idSchema.safeParse(req.params)
   if (!parsedParams.success) return res.sendStatus(400)
@@ -33,11 +39,12 @@ export async function patch(req: Request, res: Response) {
     vibes
   })
 
-  res.send(song)
+  res.send(filterSong(song))
 }
 
 export async function del(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
+  if (req.user.type !== 'admin') return res.sendStatus(403)
 
   const parsed = idSchema.safeParse(req.params)
   if (!parsed.success) return res.sendStatus(400)

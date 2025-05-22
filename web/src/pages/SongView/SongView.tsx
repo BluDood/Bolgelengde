@@ -1,31 +1,62 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './SongView.module.css'
 import { instance } from '../../lib/api.ts'
 import { useNavigate, useParams } from 'react-router'
 import Loader from '../../components/Loader/Loader.tsx'
+import { UserContext } from '../../contexts/UserContext.tsx'
 
 const SongView: React.FC = () => {
   const navigate = useNavigate()
   const params = useParams()
+
   const [song, setSong] = useState<Song | null>(null)
+  const { user } = useContext(UserContext)
 
-  async function updateSong() {
-    const song = await instance.get(`/songs/${params.id}`)
+  async function deleteSong() {
+    const res = await instance.delete(`/songs/${params.id}`)
 
-    if (song.status === 200) {
-      setSong(song.data)
+    if (res.status === 200) {
+      navigate('/songs')
     } else {
-      console.error('Failed to fetch song')
+      console.error('Failed to delete song')
     }
   }
 
   useEffect(() => {
+    async function updateSong() {
+      const song = await instance.get(`/songs/${params.id}`)
+
+      if (song.status === 200) {
+        setSong(song.data)
+      } else {
+        if (song.status === 404) {
+          alert('Song not found!')
+          navigate('/songs')
+        } else {
+          alert('Failed to fetch song')
+        }
+      }
+    }
+
     updateSong()
-  }, [])
+  }, [params.id, navigate])
 
   return song ? (
     <div className={styles.song}>
       <div className={styles.header}>
+        {user?.type === 'admin' ? (
+          <div className={styles.actions}>
+            <button
+              data-type="save"
+              onClick={() => navigate(`/songs/${params.id}/edit`)}
+            >
+              <span className="material-icons">edit</span>
+            </button>
+            <button data-type="delete" onClick={deleteSong}>
+              <span className="material-icons"> delete </span>
+            </button>
+          </div>
+        ) : null}
         <div className={styles.cover}>
           <span className="material-icons">album</span>
         </div>

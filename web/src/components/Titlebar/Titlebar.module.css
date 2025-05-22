@@ -36,3 +36,7 @@
   padding: 8px;
   display: flex;
 }
+
+.actions button[data-color='red'] {
+  color: red;
+}

@@ -7,6 +7,7 @@ declare namespace Express {
 interface User {
   id: string
   username: string
+  type: 'user' | 'admin'
 }
 
 interface Token {

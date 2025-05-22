@@ -33,6 +33,7 @@
 .songs table {
   width: 100%;
   border-collapse: collapse;
+  animation: appear 500ms ease;
 }
 
 .songs th,

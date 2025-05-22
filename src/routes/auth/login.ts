@@ -17,7 +17,8 @@ export async function post(req: Request, res: Response) {
     token: token.token,
     user: {
       id: user.id,
-      username: user.username
+      username: user.username,
+      type: user.type
     }
   })
 }

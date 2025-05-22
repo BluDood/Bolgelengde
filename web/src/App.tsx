@@ -7,6 +7,7 @@ import Songs from './pages/Songs/Songs.tsx'
 import NewSong from './pages/NewSong/NewSong.tsx'
 import Me from './pages/Me/Me.tsx'
 import SongView from './pages/SongView/SongView.tsx'
+import EditSong from './pages/EditSong/EditSong.tsx'
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route index element={<Navigate to={'/songs'} />} />
         <Route path="songs" element={<Songs />} />
         <Route path="songs/:id" element={<SongView />} />
+        <Route path="songs/:id/edit" element={<EditSong />} />
         <Route path="songs/new" element={<NewSong />} />
         <Route path="me" element={<Me />} />
       </Route>

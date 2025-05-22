@@ -1,5 +1,14 @@
+import { User } from '../../generated/prisma/index.js'
 import prisma from './prisma.js'
 import { hashPassword, random, verifyPassword } from './utils.js'
+
+export function filterUser(user: User) {
+  return {
+    id: user.id,
+    username: user.username,
+    type: user.type
+  }
+}
 
 export async function createUser({
   username,

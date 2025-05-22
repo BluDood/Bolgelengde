@@ -1,4 +1,4 @@
-.new {
+.update {
   display: flex;
   flex-direction: column;
   animation: appear 500ms ease;

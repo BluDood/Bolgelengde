@@ -17,8 +17,14 @@ model User {
   createdAt DateTime @default(now())
   salt      String
   hash      String
+  type      UserType @default(user)
 
   tokens Token[]
+}
+
+enum UserType {
+  user
+  admin
 }
 
 model Token {

@@ -5,11 +5,12 @@ import { deleteUser, updateUser } from '../../lib/users.js'
 export async function get(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
 
-  const { id, username } = req.user
+  const { id, username, type } = req.user
 
   res.json({
     id,
-    username
+    username,
+    type
   })
 }
 
