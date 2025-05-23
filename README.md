@@ -27,7 +27,7 @@ Her trenger du Docker installert.
 
 ```bash
 # Klon repositoriet
-$ git clone https://github.com/BluDood/Bølgelengde
+$ git clone https://github.com/BluDood/Bolgelengde
 # Bygg og kjør Docker-filen
 $ docker compose up --build -d
 ```
@@ -38,7 +38,7 @@ Du trenger Node installert, nåverende LTS er 22.16
 
 ```bash
 # Klon repositoriet
-$ git clone https://github.com/BluDood/Bølgelengde
+$ git clone https://github.com/BluDood/Bolgelengde
 # Installer node_modules, og start serveren i utviklings-modus
 $ npm i
 $ npm run dev
