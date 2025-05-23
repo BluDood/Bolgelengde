@@ -43,14 +43,6 @@ enum LogLevel {
 
 class Logger {
   private level: LogLevel = isDev ? LogLevel.DEBUG : LogLevel.INFO
-  constructor() {
-    if (process.env.BLUTOOLS_LOG_LEVEL) {
-      const level = parseInt(process.env.BLUTOOLS_LOG_LEVEL, 10)
-      if (level >= LogLevel.DEBUG && level <= LogLevel.ERROR) {
-        this.level = level
-      }
-    }
-  }
 
   private logLevelNames = ['DEBUG', 'INFO', 'WARN', 'ERROR']
 

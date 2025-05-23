@@ -10,6 +10,10 @@ const Titlebar: React.FC = () => {
   const actions = [
     { icon: 'music_note', action: () => navigate('/songs') },
     { icon: 'add', action: () => navigate('/songs/new'), admin: true },
+    {
+      icon: 'library_music',
+      action: () => navigate('/playlists')
+    },
     { icon: 'person', action: () => navigate('/me') },
     {
       icon: 'logout',

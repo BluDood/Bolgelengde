@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { createSong, filterSong, getSongs } from '../../lib/songs.js'
 import { createSongSchema } from '../../lib/schemas.js'
+import { logger } from '../../lib/utils.js'
 
 export async function get(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
@@ -24,6 +25,11 @@ export async function post(req: Request, res: Response) {
     genre,
     vibes
   })
+
+  logger.debug(
+    `User ${req.user.username} created song ${song.title} by ${song.artist}`,
+    'songs'
+  )
 
   res.send(filterSong(song))
 }

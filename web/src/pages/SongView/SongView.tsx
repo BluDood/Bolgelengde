@@ -10,12 +10,16 @@ const SongView: React.FC = () => {
   const params = useParams()
 
   const [song, setSong] = useState<Song | null>(null)
+  // bruker-context hentes, brukes for å sjekke om bruker er admin og vise knapper for oppdatering og sletting
   const { user } = useContext(UserContext)
 
   async function deleteSong() {
+    // bekreftelse før sletting
+    if (!confirm('Are you sure you want to delete this song?')) return
     const res = await instance.delete(`/songs/${params.id}`)
 
     if (res.status === 200) {
+      // naviger tilbake til sanglisten
       navigate('/songs')
     } else {
       console.error('Failed to delete song')
@@ -23,7 +27,8 @@ const SongView: React.FC = () => {
   }
 
   useEffect(() => {
-    async function updateSong() {
+    // hent sang
+    async function fetchSong() {
       const song = await instance.get(`/songs/${params.id}`)
 
       if (song.status === 200) {
@@ -38,7 +43,7 @@ const SongView: React.FC = () => {
       }
     }
 
-    updateSong()
+    fetchSong()
   }, [params.id, navigate])
 
   return song ? (

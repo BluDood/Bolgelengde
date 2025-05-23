@@ -6,6 +6,7 @@ import {
   getSong,
   updateSong
 } from '../../../lib/songs.js'
+import { logger } from '../../../lib/utils.js'
 
 export async function get(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
@@ -39,6 +40,11 @@ export async function patch(req: Request, res: Response) {
     vibes
   })
 
+  logger.debug(
+    `User ${req.user.username} updated song ${song.title} by ${song.artist}`,
+    'songs'
+  )
+
   res.send(filterSong(song))
 }
 
@@ -54,6 +60,11 @@ export async function del(req: Request, res: Response) {
   if (!song) return res.sendStatus(404)
 
   await deleteSong(id)
+
+  logger.debug(
+    `User ${req.user.username} deleted song ${song.title} by ${song.artist}`,
+    'songs'
+  )
 
   res.sendStatus(204)
 }

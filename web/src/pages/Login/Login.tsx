@@ -13,10 +13,13 @@ const Login: React.FC = () => {
   async function login() {
     const username = usernameRef.current?.value
     const password = passwordRef.current?.value
+
+    // sjekk om alle feltene er fylt ut
     if (!username || !password) {
       return alert('Please fill in all fields')
     }
 
+    // prøv innlogging
     const res = await instance.post('/auth/login', {
       username,
       password
@@ -25,6 +28,7 @@ const Login: React.FC = () => {
     if (res.status !== 200) {
       return alert('Invalid username or password')
     } else {
+      // oppdater bruker i context, lagre token, naviger til forsiden som vil navigere til sangoversikt
       setUser(res.data.user)
       localStorage.setItem('token', res.data.token)
       navigate('/')
@@ -32,6 +36,7 @@ const Login: React.FC = () => {
   }
 
   useEffect(() => {
+    // hvis bruker allerede er innlogget, naviger vekk
     if (user) navigate('/')
   }, [user, navigate])
 

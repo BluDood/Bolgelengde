@@ -1,6 +1,7 @@
 import { Song } from '../../generated/prisma/index.js'
 import prisma from './prisma.js'
 
+// filtrer sang for sending tilbake til bruker
 export function filterSong(song: Song) {
   return {
     id: song.id,
@@ -11,12 +12,14 @@ export function filterSong(song: Song) {
   }
 }
 
+// hent alle sanger
 export async function getSongs() {
   const song = await prisma.song.findMany()
 
   return song
 }
 
+// hent en sang
 export async function getSong(id: string) {
   const song = await prisma.song.findUnique({
     where: {
@@ -27,6 +30,7 @@ export async function getSong(id: string) {
   return song
 }
 
+// lag sang
 export async function createSong({
   title,
   artist,
@@ -50,6 +54,7 @@ export async function createSong({
   return song
 }
 
+// oppdater sang, dataen som skal oppdateres kan være valgfritt for å beholde den forrige verdien
 export async function updateSong(
   id: string,
   {
@@ -79,6 +84,7 @@ export async function updateSong(
   return song
 }
 
+// slett sang
 export async function deleteSong(id: string) {
   const song = await prisma.song.delete({
     where: {
@@ -89,6 +95,7 @@ export async function deleteSong(id: string) {
   return song
 }
 
+// søk etter sanger, som sjekker om søket finnes i en tittel, artist, sjanger eller vibe
 export async function searchSongs(query: string) {
   const songs = await prisma.song.findMany({
     where: {

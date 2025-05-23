@@ -19,4 +19,4 @@ RUN npm run build
 
 WORKDIR /app
 
-CMD npx prisma migrate deploy && npm start
+CMD npx prisma db push && npm start

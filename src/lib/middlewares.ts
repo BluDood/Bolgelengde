@@ -45,11 +45,10 @@ export async function setupMiddlewares(app: Application) {
     })
   )
 
-  app.use(express.static(path.join(process.cwd(), 'web', 'build')))
-
-  app.use((req: Request, res: Response) => {
-    res.status(404).send()
-  })
+  app.use(express.static(path.join(process.cwd(), 'web', 'dist')))
+  app.use((req, res) =>
+    res.sendFile(path.join(process.cwd(), 'web/dist/index.html'))
+  )
 
   app.use(
     (err: Error, req: Request, res: Response, next: NextFunction) => {

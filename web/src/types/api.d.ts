@@ -11,3 +11,17 @@ interface User {
   username: string
   type: 'user' | 'admin'
 }
+
+interface Playlist {
+  id: string
+  name: string
+  occasions: string[]
+}
+
+type PlaylistWithCount = Playlist & {
+  songs: number
+}
+
+type PlaylistWithSongs = Playlist & {
+  songs: Song[]
+}

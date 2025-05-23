@@ -13,6 +13,7 @@ const Songs: React.FC = () => {
     setSongs(null)
     const query = queryRef.current?.value
     if (query) {
+      // søk etter sanger om bruker har skrevet noe i søkefeltet
       const songs = await instance.post('/songs/search', {
         query
       })
@@ -23,6 +24,7 @@ const Songs: React.FC = () => {
         console.error('Failed to fetch songs')
       }
     } else {
+      // hvis ikke, hent alle sanger
       const songs = await instance.get('/songs')
 
       if (songs.status === 200) {
@@ -73,7 +75,7 @@ const Songs: React.FC = () => {
           </thead>
           <tbody>
             {songs &&
-              songs.map((song: any) => (
+              songs.map((song: Song) => (
                 <tr
                   key={song.id}
                   onClick={() => navigate(`/songs/${song.id}`)}

@@ -19,7 +19,8 @@ model User {
   hash      String
   type      UserType @default(user)
 
-  tokens Token[]
+  tokens    Token[]
+  playlists Playlist[]
 }
 
 enum UserType {
@@ -37,10 +38,21 @@ model Token {
 }
 
 model Song {
-  id        String   @id @unique @default(cuid())
+  id        String     @id @unique @default(cuid())
   title     String
   artist    String
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
   genre     String
   vibes     String[]
+  playlists Playlist[]
+}
+
+model Playlist {
+  id        String   @id @unique @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  occasions String[]
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  songs     Song[]
 }

@@ -20,6 +20,7 @@ const Me: React.FC = () => {
   async function updateProfile() {
     const username = usernameRef.current?.value
 
+    // sjekk om brukernavn har en verdi
     if (!username) {
       alert('Username is required')
       return
@@ -27,9 +28,11 @@ const Me: React.FC = () => {
 
     setState(State.Loading)
 
+    // oppdater brukeren i databasen
     const res = await instance.patch('/auth', { username })
 
     if (res.status === 200) {
+      // oppdater brukeren i context
       setUser(res.data)
       setState(State.Success)
     } else {
@@ -39,10 +42,15 @@ const Me: React.FC = () => {
   }
 
   async function deleteProfile() {
+    // bekreftelse før sletting
+    if (!confirm('Are you sure you want to delete your profile?')) return
+
+    // slett brukeren i databasen
     const res = await instance.delete('/auth')
 
     if (res.status === 204) {
       alert('Profile deleted successfully')
+      // naviger til forsiden som da vil navigere til login
       navigate('/')
     } else {
       alert('Failed to delete profile')
@@ -51,6 +59,7 @@ const Me: React.FC = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      // fjern check ikon etter 2 sekunder
       if (state === State.Success) setState(State.Pending)
     }, 2000)
 

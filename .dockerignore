@@ -8,11 +8,12 @@
 !package-lock.json
 !tsconfig.json
 
+!web/public
 !web/src
-!web/static
-!web/types
+!web/index.html
 !web/package.json
 !web/package-lock.json
-!web/svelte.config.js
+!web/tsconfig.app.json
 !web/tsconfig.json
+!web/tsconfig.node.json
 !web/vite.config.ts

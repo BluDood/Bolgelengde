@@ -39,3 +39,14 @@ export const updateSongSchema = z.object({
 export const searchSongSchema = z.object({
   query: z.string().min(1).max(64)
 })
+
+export const createPlaylistSchema = z.object({
+  name: z.string().min(1),
+  occasions: z.array(z.string()).min(1).max(16)
+})
+
+export const updatePlaylistSchema = z.object({
+  name: z.string().min(1).optional(),
+  occasions: z.array(z.string()).min(1).max(16).optional(),
+  songs: z.array(id).optional()
+})

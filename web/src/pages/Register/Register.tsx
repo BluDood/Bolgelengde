@@ -15,14 +15,18 @@ const Register: React.FC = () => {
     const username = usernameRef.current?.value
     const password = passwordRef.current?.value
     const passwordConf = passwordConfRef.current?.value
+
+    // sjekk om alle feltene er fylt ut
     if (!username || !password || !passwordConf) {
       return alert('Please fill in all fields')
     }
 
+    // sjekk om passordene er like
     if (password !== passwordConf) {
       return alert('Passwords do not match')
     }
 
+    // registrer bruker
     const res = await instance.post('/auth/register', {
       username,
       password
@@ -30,11 +34,14 @@ const Register: React.FC = () => {
 
     if (res.status !== 200) {
       if (res.status === 409) {
+        // 409 betyr at brukernavnet allerede finnes
         return alert('Username already exists')
       } else {
+        // 400, den eneste resterende koden, betyr at passordet er for svakt eller brukernavnet er for kort/langt
         return alert('Invalid username or password')
       }
     } else {
+      // oppdater bruker i context, lagre token, naviger til forsiden som vil navigere til sangoversikt
       setUser(res.data.user)
       localStorage.setItem('token', res.data.token)
       navigate('/')
@@ -42,6 +49,7 @@ const Register: React.FC = () => {
   }
 
   useEffect(() => {
+    // hvis bruker allerede er innlogget, naviger vekk
     if (user) navigate('/')
   }, [user, navigate])
 

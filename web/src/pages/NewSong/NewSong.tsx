@@ -16,11 +16,13 @@ const NewSong: React.FC = () => {
     const genre = genreRef.current?.value
     const vibes = vibesRef.current?.value
 
+    // sjekk om alle feltene er fylt ut
     if (!title || !genre || !vibes) {
       alert('Please fill in all fields')
       return
     }
 
+    // opprett sangen
     const res = await instance.post('/songs', {
       title,
       artist,
@@ -32,6 +34,7 @@ const NewSong: React.FC = () => {
     })
 
     if (res.status === 200) {
+      // naviger til sangen
       navigate(`/songs/${res.data.id}`)
     } else {
       alert('Error creating song')

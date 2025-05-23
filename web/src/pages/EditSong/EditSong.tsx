@@ -19,15 +19,18 @@ const EditSong: React.FC = () => {
     const genre = genreRef.current?.value
     const vibes = vibesRef.current?.value
 
+    // sjekk om alle feltene er fylt ut
     if (!title || !genre || !vibes) {
       alert('Please fill in all fields')
       return
     }
 
+    // oppdater sangen
     const res = await instance.patch(`/songs/${params.id}`, {
       title,
       artist,
       genre,
+      // splitt vibes siden det lagret som liste i databasen
       vibes: vibes
         .split(' ')
         .map(vibe => vibe.trim())
@@ -35,6 +38,7 @@ const EditSong: React.FC = () => {
     })
 
     if (res.status === 200) {
+      // naviger tilbake til sangen
       navigate(`/songs/${res.data.id}`)
     } else {
       alert('Error updating song')
@@ -42,6 +46,7 @@ const EditSong: React.FC = () => {
   }
 
   useEffect(() => {
+    // hent sang
     async function fetchSong() {
       const res = await instance.get(`/songs/${params.id}`)
 
