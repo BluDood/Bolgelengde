@@ -1,4 +1,4 @@
-# Bølgelengde
+# Bølgelengde (Prøveeksamen Mai 2025)
 
 En full-stack webapplikasjon for å ha oversikt over sanger, og kunne legge de inn i spillelister. Inkluderer hjemmelaget autentisering med sikker lagring av passord ved bruk av hashing og salting, og autorisering for å skille mellom admin-brukere og vanlige brukere.
 
